@@ -1,7 +1,15 @@
+using GeniusFusion_GroupProject.Entities;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+string? connstr = builder.Configuration.GetConnectionString("GeniusFusionDb");
+builder.Services.AddDbContext<GeniusFusionDbContext>(options => options.UseSqlServer(connstr)); 
+
+
 
 var app = builder.Build();
 
