@@ -12,7 +12,11 @@ namespace GeniusFusion_GroupProject.Entities
 {
     public class Course
     {
-
+        public Course()
+        {
+            Enrollments = new List<Enrollment>();
+        }
+        [Key]
         public int ? CourseId { get; set; }
         public string ?  CourseName { get; set; }
 

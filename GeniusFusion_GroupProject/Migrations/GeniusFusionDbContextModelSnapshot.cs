@@ -103,11 +103,20 @@ namespace GeniusFusion_GroupProject.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("FacultyId"));
 
-                    b.Property<string>("EmailAddress")
+                    b.Property<string>("FacultyAddress")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Name")
+                    b.Property<string>("FacultyEmail")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FacultyName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FacultyPhone")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("dateOfBirth")
+                        .HasColumnType("datetime2");
 
                     b.HasKey("FacultyId");
 
@@ -117,14 +126,20 @@ namespace GeniusFusion_GroupProject.Migrations
                         new
                         {
                             FacultyId = 1,
-                            EmailAddress = "peter@geniusFusion.edu",
-                            Name = "Peter Mazdiak"
+                            FacultyAddress = "Waterloo, ON",
+                            FacultyEmail = "peter@geniusFusion.edu",
+                            FacultyName = "Peter Mazdiak",
+                            FacultyPhone = "1234567890",
+                            dateOfBirth = new DateTime(1985, 5, 31, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             FacultyId = 2,
-                            EmailAddress = "Eliott@geniusFusion.edu",
-                            Name = "Eliott Coleshill "
+                            FacultyAddress = "Kitchener, ON",
+                            FacultyEmail = "Eliott@geniusFusion.edu",
+                            FacultyName = "Eliott Coleshill",
+                            FacultyPhone = "2223334465",
+                            dateOfBirth = new DateTime(1999, 6, 18, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         });
                 });
 
@@ -136,11 +151,20 @@ namespace GeniusFusion_GroupProject.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int?>("StudentId"));
 
+                    b.Property<string>("StudentAddress")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("StudentEmail")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("StudentName")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("StudentPhone")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("dateOfBirth")
+                        .HasColumnType("datetime2");
 
                     b.HasKey("StudentId");
 
@@ -150,14 +174,20 @@ namespace GeniusFusion_GroupProject.Migrations
                         new
                         {
                             StudentId = 1,
-                            StudentEmail = "student1@example.com",
-                            StudentName = "Student 1"
+                            StudentAddress = "Waterloo, ON",
+                            StudentEmail = "Bob@geniusfusion.edu",
+                            StudentName = "Bob Martin",
+                            StudentPhone = "3336664478",
+                            dateOfBirth = new DateTime(2002, 8, 31, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             StudentId = 2,
-                            StudentEmail = "student2@example.com",
-                            StudentName = "Student 2"
+                            StudentAddress = "Kitchener, ON",
+                            StudentEmail = "Jake@geniusfusion.edu",
+                            StudentName = "Jake Alace",
+                            StudentPhone = "4445557789",
+                            dateOfBirth = new DateTime(2001, 7, 25, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         });
                 });
 

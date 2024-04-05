@@ -1,8 +1,11 @@
-﻿namespace GeniusFusion_GroupProject.Entities
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace GeniusFusion_GroupProject.Entities
 {
     public class Enrollment
     {
 
+        
         public int EnrollmentId {get;set;}
 
         // Foreign key for Course 

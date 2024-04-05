@@ -49,8 +49,8 @@ namespace GeniusFusion_GroupProject.Entities
 
             // Seed faculties
             modelBuilder.Entity<Faculty>().HasData(
-                new Faculty { FacultyId = 1, Name = "Peter Mazdiak", EmailAddress = "peter@geniusFusion.edu"},
-                new Faculty { FacultyId = 2, Name = "Eliott Coleshill ", EmailAddress = "Eliott@geniusFusion.edu" }
+                new Faculty { FacultyId = 1, FacultyName = "Peter Mazdiak", dateOfBirth = new DateTime(1985, 5, 31), FacultyPhone = "1234567890", FacultyAddress="Waterloo, ON", FacultyEmail = "peter@geniusFusion.edu"},
+                new Faculty { FacultyId = 2, FacultyName = "Eliott Coleshill", dateOfBirth= new DateTime(1999, 6, 18), FacultyPhone = "2223334465", FacultyAddress = "Kitchener, ON",  FacultyEmail = "Eliott@geniusFusion.edu" }
                 
             );
 
@@ -61,8 +61,8 @@ namespace GeniusFusion_GroupProject.Entities
             );
             // Seed students
             modelBuilder.Entity<Student>().HasData(
-                new Student { StudentId = 1, StudentName = "Student 1", StudentEmail = "student1@example.com" }, 
-                new Student { StudentId = 2, StudentName = "Student 2", StudentEmail = "student2@example.com" }
+                new Student { StudentId = 1, StudentName = "Bob Martin", dateOfBirth = new DateTime(2002, 8, 31), StudentPhone = "3336664478", StudentAddress = "Waterloo, ON",  StudentEmail = "Bob@geniusfusion.edu" }, 
+                new Student { StudentId = 2, StudentName = "Jake Alace", dateOfBirth = new DateTime(2001, 7, 25), StudentPhone = "4445557789", StudentAddress = "Kitchener, ON",  StudentEmail = "Jake@geniusfusion.edu" }
                 
             );
 
