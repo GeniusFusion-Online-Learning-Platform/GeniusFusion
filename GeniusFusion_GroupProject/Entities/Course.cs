@@ -18,7 +18,7 @@ namespace GeniusFusion_GroupProject.Entities
             Enrollments = new List<Enrollment>();
         }
         [Key]
-        public int ? CourseId { get; set; }
+        public int  CourseId { get; set; }
         public string ?  CourseName { get; set; }
 
 
