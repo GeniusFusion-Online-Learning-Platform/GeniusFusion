@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace GeniusFusion_GroupProject.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialSetup : Migration
+    public partial class Initial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -124,9 +124,10 @@ namespace GeniusFusion_GroupProject.Migrations
                 columns: new[] { "CourseId", "StudentId", "EnrollmentId" },
                 values: new object[,]
                 {
-                    { 1, 1, 0 },
-                    { 1, 2, 0 },
-                    { 2, 1, 0 }
+                    { 1, 1, 1 },
+                    { 1, 2, 3 },
+                    { 2, 1, 2 },
+                    { 2, 2, 4 }
                 });
 
             migrationBuilder.CreateIndex(

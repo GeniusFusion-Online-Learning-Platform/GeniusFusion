@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GeniusFusion_GroupProject.Migrations
 {
     [DbContext(typeof(GeniusFusionDbContext))]
-    [Migration("20240404180222_InitialSetup")]
-    partial class InitialSetup
+    [Migration("20240405191332_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -82,19 +82,25 @@ namespace GeniusFusion_GroupProject.Migrations
                         {
                             CourseId = 1,
                             StudentId = 1,
-                            EnrollmentId = 0
-                        },
-                        new
-                        {
-                            CourseId = 1,
-                            StudentId = 2,
-                            EnrollmentId = 0
+                            EnrollmentId = 1
                         },
                         new
                         {
                             CourseId = 2,
                             StudentId = 1,
-                            EnrollmentId = 0
+                            EnrollmentId = 2
+                        },
+                        new
+                        {
+                            CourseId = 1,
+                            StudentId = 2,
+                            EnrollmentId = 3
+                        },
+                        new
+                        {
+                            CourseId = 2,
+                            StudentId = 2,
+                            EnrollmentId = 4
                         });
                 });
 

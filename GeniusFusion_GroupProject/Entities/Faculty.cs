@@ -20,6 +20,7 @@ namespace GeniusFusion_GroupProject.Entities
         public string? FacultyAddress { get; set; }
 
         public string? FacultyEmail { get; set;}
+
         public List<Course> CoursesTaught { get; set; }
 
 

@@ -42,36 +42,33 @@ namespace GeniusFusion_GroupProject.Entities
             base.OnModelCreating(modelBuilder);
         }
 
+
         private void SeedData(ModelBuilder modelBuilder)
         {
-            // Seed courses
-            
-
             // Seed faculties
             modelBuilder.Entity<Faculty>().HasData(
-                new Faculty { FacultyId = 1, FacultyName = "Peter Mazdiak", dateOfBirth = new DateTime(1985, 5, 31), FacultyPhone = "1234567890", FacultyAddress="Waterloo, ON", FacultyEmail = "peter@geniusFusion.edu"},
-                new Faculty { FacultyId = 2, FacultyName = "Eliott Coleshill", dateOfBirth= new DateTime(1999, 6, 18), FacultyPhone = "2223334465", FacultyAddress = "Kitchener, ON",  FacultyEmail = "Eliott@geniusFusion.edu" }
-                
+                new Faculty { FacultyId = 1, FacultyName = "Peter Mazdiak", dateOfBirth = new DateTime(1985, 5, 31), FacultyPhone = "1234567890", FacultyAddress = "Waterloo, ON", FacultyEmail = "peter@geniusFusion.edu" },
+                new Faculty { FacultyId = 2, FacultyName = "Eliott Coleshill", dateOfBirth = new DateTime(1999, 6, 18), FacultyPhone = "2223334465", FacultyAddress = "Kitchener, ON", FacultyEmail = "Eliott@geniusFusion.edu" }
             );
 
+            // Seed courses
             modelBuilder.Entity<Course>().HasData(
                 new Course { CourseId = 1, CourseName = "Enterprise Application Development", FacultyId = 1 },
                 new Course { CourseId = 2, CourseName = "Software Quality", FacultyId = 2 }
-
             );
+
             // Seed students
             modelBuilder.Entity<Student>().HasData(
-                new Student { StudentId = 1, StudentName = "Bob Martin", dateOfBirth = new DateTime(2002, 8, 31), StudentPhone = "3336664478", StudentAddress = "Waterloo, ON",  StudentEmail = "Bob@geniusfusion.edu" }, 
-                new Student { StudentId = 2, StudentName = "Jake Alace", dateOfBirth = new DateTime(2001, 7, 25), StudentPhone = "4445557789", StudentAddress = "Kitchener, ON",  StudentEmail = "Jake@geniusfusion.edu" }
-                
+                new Student { StudentId = 1, StudentName = "Bob Martin", dateOfBirth = new DateTime(2002, 8, 31), StudentPhone = "3336664478", StudentAddress = "Waterloo, ON", StudentEmail = "Bob@geniusfusion.edu" },
+                new Student { StudentId = 2, StudentName = "Jake Alace", dateOfBirth = new DateTime(2001, 7, 25), StudentPhone = "4445557789", StudentAddress = "Kitchener, ON", StudentEmail = "Jake@geniusfusion.edu" }
             );
 
             // Seed enrollments
             modelBuilder.Entity<Enrollment>().HasData(
-                new Enrollment { CourseId = 1, StudentId = 1 },
-                new Enrollment { CourseId = 1, StudentId = 2 },
-                new Enrollment { CourseId = 2, StudentId = 1 }
-                
+                new Enrollment { EnrollmentId = 1, CourseId = 1, StudentId = 1 },
+                new Enrollment { EnrollmentId = 2, CourseId = 2, StudentId = 1 },
+                new Enrollment { EnrollmentId = 3, CourseId = 1, StudentId = 2 },
+                new Enrollment { EnrollmentId = 4, CourseId = 2, StudentId = 2 }
             );
         }
     }

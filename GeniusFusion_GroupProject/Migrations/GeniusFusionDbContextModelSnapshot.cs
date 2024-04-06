@@ -79,19 +79,25 @@ namespace GeniusFusion_GroupProject.Migrations
                         {
                             CourseId = 1,
                             StudentId = 1,
-                            EnrollmentId = 0
-                        },
-                        new
-                        {
-                            CourseId = 1,
-                            StudentId = 2,
-                            EnrollmentId = 0
+                            EnrollmentId = 1
                         },
                         new
                         {
                             CourseId = 2,
                             StudentId = 1,
-                            EnrollmentId = 0
+                            EnrollmentId = 2
+                        },
+                        new
+                        {
+                            CourseId = 1,
+                            StudentId = 2,
+                            EnrollmentId = 3
+                        },
+                        new
+                        {
+                            CourseId = 2,
+                            StudentId = 2,
+                            EnrollmentId = 4
                         });
                 });
 

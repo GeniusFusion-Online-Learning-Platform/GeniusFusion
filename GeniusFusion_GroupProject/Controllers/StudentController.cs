@@ -22,14 +22,16 @@ namespace GeniusFusion_GroupProject.Controllers
         [HttpGet("/Students")]
         public async Task<ActionResult<IEnumerable<Student>>> GetStudents()
         {
-            return await _context.Students.ToListAsync();
+            return await _context.Students.Include(s=>s.Enrollments).ThenInclude(e=>e.Course).ToListAsync();
         }
 
         // GET: api/Student/5
         [HttpGet("/Students/{id}")]
         public async Task<ActionResult<Student>> GetStudent(int id)
         {
-            var student = await _context.Students.FindAsync(id);
+
+            var student = await _context.Students.Include(s => s.Enrollments).FirstOrDefaultAsync(s => s.StudentId == id); 
+
 
             if (student == null)
             {
@@ -150,6 +152,8 @@ namespace GeniusFusion_GroupProject.Controllers
             {
                 return NotFound();
             }
+
+
 
             _context.Students.Remove(student);
             await _context.SaveChangesAsync();

@@ -22,7 +22,7 @@ namespace GeniusFusion_GroupProject.Controllers
         [HttpGet("/Course")]
         public async Task<ActionResult<IEnumerable<Course>>> GetCourses()
         {
-            return await _context.Courses.ToListAsync();
+            return await _context.Courses.Include(e=> e.Enrollments).ToListAsync();
         }
 
         // GET: api/Course/5
