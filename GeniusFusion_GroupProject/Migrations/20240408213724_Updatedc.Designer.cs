@@ -4,6 +4,7 @@ using GeniusFusion_GroupProject.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GeniusFusion_GroupProject.Migrations
 {
     [DbContext(typeof(GeniusFusionDbContext))]
-    partial class GeniusFusionDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240408213724_Updatedc")]
+    partial class Updatedc
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
