@@ -27,7 +27,7 @@ namespace GeniusFusion_GroupProject.Entities
         public int FacultyId { get; set; }
 
         [JsonIgnore]
-        public Faculty Faculty { get; set; }
+        public Faculty? Faculty { get; set; }
 
         public List<Enrollment> Enrollments { get; set; }
 
