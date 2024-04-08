@@ -74,11 +74,6 @@
         }
     });
 
-
-
-
-
-    // Call the loadFaculties function when the page loads
     loadFaculties();
 });
  
