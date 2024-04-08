@@ -1,0 +1,35 @@
+﻿
+
+
+@{
+    ViewData["Title"] = "Login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Login</h1>
+
+<form id="loginForm">
+    <label for="username">Username:</label>
+    <input type="text" id="username" name="username" required><br><br>
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="password" required><br><br>
+    <label for="accessType">Access Type:</label>
+    <select id="accessType" name="accessType">
+        <option value="Admin">Admin</option>
+        <option value="Faculty">Faculty</option>
+        <option value="Student">Student</option>
+    </select><br><br>
+    <input type="submit" value="Login">
+</form>
+
+<!-- Add a link to the Register page -->
+<div>
+    <a href="@Url.Action("Register", "Home")">Sign Up</a>
+    <a href="@Url.Action("Faculty", "Home")" class="btn btn-primary">View Faculties</a>
+
+</div>
+
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="~/js/Login.js"></script>
+}

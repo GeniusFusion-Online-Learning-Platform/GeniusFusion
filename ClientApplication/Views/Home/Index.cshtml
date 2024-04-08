@@ -1,32 +1,44 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿
+
+@{
+    Layout = null; // Since this is a standalone page, we remove the layout
 }
 
-<div class="text-center">
-    <h1>Faculties List</h1>
-    <ul id="facultiesList">
-        
-    </ul>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Welcome to GeniusFusion</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
 
+        .container {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="~/images/logo-png.png" alt="GeniusFusion Logo" style="max-width: 200px;">
+        <h1>Welcome to GeniusFusion</h1>
+    </div>
 
-    <h2>Add Faculty</h2>
-    <form id="addFacultyForm">
-        <label for="facultyNameInput">Faculty Name:</label><br>
-        <input type="text" id="facultyNameInput" name="facultyNameInput" required><br>
-
-        <label for="dateOfBirthInput">Date of Birth:</label><br>
-        <input type="date" id="dateOfBirthInput" name="dateOfBirthInput" required><br>
-
-        <label for="facultyPhoneInput">Phone:</label><br>
-        <input type="tel" id="facultyPhoneInput" name="facultyPhoneInput" required><br>
-
-        <label for="facultyAddressInput">Address:</label><br>
-        <input type="text" id="facultyAddressInput" name="facultyAddressInput" required><br>
-
-        <label for="facultyEmailInput">Email:</label><br>
-        <input type="email" id="facultyEmailInput" name="facultyEmailInput" required><br>
-
-        <button id="addFacultyBtn" type="button" class="btn btn-success">Add Faculty</button>
-    </form>
-
-</div>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            // Redirect to the Login page after 5 seconds
+            setTimeout(function () {
+                window.location.href = '@Url.Action("Login", "Home")'; // Assuming Home is the controller and Login is the action
+            }, 5000); // 5 seconds
+        });
+    </script>
+</body>
+</html>

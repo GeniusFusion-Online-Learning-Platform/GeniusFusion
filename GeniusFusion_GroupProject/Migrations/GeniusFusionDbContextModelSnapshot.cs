@@ -24,11 +24,11 @@ namespace GeniusFusion_GroupProject.Migrations
 
             modelBuilder.Entity("GeniusFusion_GroupProject.Entities.Course", b =>
                 {
-                    b.Property<int?>("CourseId")
+                    b.Property<int>("CourseId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int?>("CourseId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CourseId"));
 
                     b.Property<string>("CourseName")
                         .HasColumnType("nvarchar(max)");

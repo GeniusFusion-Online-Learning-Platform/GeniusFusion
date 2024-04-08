@@ -17,6 +17,12 @@ namespace GeniusFusion_GroupProject.Entities
         public DbSet<Student> Students { get; set; }
         public DbSet<Enrollment> Enrollments { get; set; }
 
+        public DbSet<AdminCredentials> Admins { get; set; }
+
+        public DbSet<StudentCredentials> StudentCredentials { get; set; }
+
+        public DbSet<FacultyCredentials> facultyCredentials { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Enrollment>()

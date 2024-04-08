@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GeniusFusion_GroupProject.Migrations
 {
     [DbContext(typeof(GeniusFusionDbContext))]
-    [Migration("20240405191332_Initial")]
-    partial class Initial
+    [Migration("20240408210244_InitialSetup")]
+    partial class InitialSetup
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -27,11 +27,11 @@ namespace GeniusFusion_GroupProject.Migrations
 
             modelBuilder.Entity("GeniusFusion_GroupProject.Entities.Course", b =>
                 {
-                    b.Property<int?>("CourseId")
+                    b.Property<int>("CourseId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int?>("CourseId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CourseId"));
 
                     b.Property<string>("CourseName")
                         .HasColumnType("nvarchar(max)");
