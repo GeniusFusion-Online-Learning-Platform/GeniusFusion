@@ -1,19 +1,7 @@
-using GeniusFusion_GroupProject.Entities;
-using Microsoft.EntityFrameworkCore;
-
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-
-string? connstr = builder.Configuration.GetConnectionString("GeniusFusionDb");
-builder.Services.AddDbContext<GeniusFusionDbContext>(options => options.UseSqlServer(connstr));
-
-builder.Services.AddCors(options => {
-    options.AddPolicy("AllowTaskClients", policy => {
-        policy.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
-    });
-});
 
 var app = builder.Build();
 
@@ -25,9 +13,12 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
+
+app.UseCors("AllowTaskClients"); 
+
+
 app.UseHttpsRedirection();
 app.UseStaticFiles();
-app.UseCors("AllowTaskClients"); 
 
 app.UseRouting();
 

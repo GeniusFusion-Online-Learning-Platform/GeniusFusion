@@ -43,6 +43,14 @@ namespace GeniusFusion_GroupProject.Controllers
         [HttpPost("/Course")]
         public async Task<ActionResult<Course>> CreateCourse(Course course)
         {
+            // Check if the provided FacultyId corresponds to an existing faculty
+            var existingFaculty = await _context.Faculties.FindAsync(course.FacultyId);
+            if (existingFaculty == null)
+            {
+                return BadRequest("Faculty not found."); // Return a 400 Bad Request if the faculty does not exist
+            }
+
+            // If the faculty exists, proceed with creating the course
             _context.Courses.Add(course);
             await _context.SaveChangesAsync();
 

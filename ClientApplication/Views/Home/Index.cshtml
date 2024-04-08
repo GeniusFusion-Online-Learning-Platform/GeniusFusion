@@ -1,0 +1,32 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1>Faculties List</h1>
+    <ul id="facultiesList">
+        
+    </ul>
+
+
+    <h2>Add Faculty</h2>
+    <form id="addFacultyForm">
+        <label for="facultyNameInput">Faculty Name:</label><br>
+        <input type="text" id="facultyNameInput" name="facultyNameInput" required><br>
+
+        <label for="dateOfBirthInput">Date of Birth:</label><br>
+        <input type="date" id="dateOfBirthInput" name="dateOfBirthInput" required><br>
+
+        <label for="facultyPhoneInput">Phone:</label><br>
+        <input type="tel" id="facultyPhoneInput" name="facultyPhoneInput" required><br>
+
+        <label for="facultyAddressInput">Address:</label><br>
+        <input type="text" id="facultyAddressInput" name="facultyAddressInput" required><br>
+
+        <label for="facultyEmailInput">Email:</label><br>
+        <input type="email" id="facultyEmailInput" name="facultyEmailInput" required><br>
+
+        <button id="addFacultyBtn" type="button" class="btn btn-success">Add Faculty</button>
+    </form>
+
+</div>
