@@ -1,3 +1,5 @@
+GeniusFusion
+
 GeniusFusion is an online learning platform developed using ASP.NET Core. It provides users with access to a wide range of courses, study materials, and tools for collaboration and progress tracking. The platform aims to deliver an exceptional learning experience for students, instructors, and administrators.
 
 Features
@@ -83,3 +85,4 @@ Utilities:
 /bookmark - Bookmark courses for quick reference.
 
 /email - Email integration for communication.
+
