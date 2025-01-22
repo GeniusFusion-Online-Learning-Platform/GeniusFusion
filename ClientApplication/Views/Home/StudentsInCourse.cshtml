@@ -1,0 +1,168 @@
+﻿@{
+    ViewData["Title"] = "Students Enrolled in Course";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+<link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap" rel="stylesheet">
+
+<style>
+    .course-info-container {
+        display: flex;
+        justify-content: center; /* Center horizontally */
+        margin: 20px auto; /* Add margin to center vertically */
+    }
+
+    .sidebar {
+        width: 200px;
+        background-color: #f8f9fa;
+        padding: 20px;
+        border-right: 1px solid #ccc;
+        margin-right: 20px; /* Add margin to separate from the main section */
+    }
+
+    .main-section {
+        max-width: 600px; /* Set maximum width */
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add shadow effect */
+    }
+
+    .course-image {
+        max-width: 100%;
+        height: auto;
+        margin-bottom: 20px; /* Add margin to separate from other content */
+    }
+
+    .course-details {
+        background-color: #f8f9fa; /* Background color */
+        padding: 20px;
+        border-radius: 5px;
+    }
+
+    .details-table {
+        width: 100%;
+    }
+
+        .details-table tr {
+            border-bottom: 1px solid #ccc;
+        }
+
+        .details-table th,
+        .details-table td {
+            padding: 10px;
+            text-align: left;
+        }
+
+    .student-container {
+        margin-top: 20px;
+    }
+
+    .student-details {
+        margin-bottom: 20px;
+        padding: 10px;
+        background-color: #f0f0f0;
+        border-radius: 5px;
+    }
+
+    .student-name {
+        font-weight: bold;
+    }
+
+    .student-id,
+    .student-email {
+        margin-top: 5px;
+    }
+</style>
+
+<h1 class="text-center mt-4 mb-3">Students Enrolled in Course</h1>
+
+<div class="course-info-container">
+    <div class="sidebar">
+        <h5 class="sidebar-heading">Sidebar</h5>
+        <ul class="nav flex-column">
+            <li class="nav-item">
+                <a class="nav-link" href="/sample.pdf" target="_blank">Course Outline</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/sample.pdf" target="_blank">Instructional Plan</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/sample.pdf" target="_blank">TextBook</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/sample.pdf" target="_blank">Schedule</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/sample.pdf" target="_blank">Help</a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="main-section">
+        <img class="course-image" src="~/images/courses/course1.jpg" alt="Course Image">
+        <div class="course-details">
+
+            <!-- Add other course details here -->
+
+        </div>
+
+        <div class="student-container">
+            <!-- Students enrolled in the course will be dynamically added here -->
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+
+        $(document).ready(function () {
+            // Function to fetch and display students enrolled in the course
+            function getStudentsInCourse(courseId) {
+                $.ajax({
+                    type: "GET",
+                    url: "https://localhost:7284/Course/" + courseId + "/Students",
+                    contentType: "application/json",
+                    success: function (students) {
+                        console.log("Students enrolled in course:", students);
+                        displayStudents(students);
+                    },
+                    error: function (xhr, status, error) {
+                        console.error("Error fetching students:", xhr.responseText);
+                        // Handle error, show alert, etc.
+                    }
+                });
+            }
+
+            // Function to display students enrolled in the course
+            function displayStudents(students) {
+                var container = $(".student-container");
+                container.empty(); // Clear previous students
+
+                // Loop through each student and create HTML elements to display them
+                $.each(students, function (index, student) {
+                    // Create div to display student details
+                    var studentDiv = $("<div>").addClass("student-details");
+                    var name = $("<p>").addClass("student-name").text("Name: " + student.studentName);
+                    var id = $("<p>").addClass("student-id").text("ID: " + student.studentId);
+                    var email = $("<a>").addClass("student-email").attr("href", "mailto:" + student.studentEmail).text("Email: " + student.studentEmail);
+
+                    // Append name, id, and email to student div
+                    studentDiv.append(name, id, email);
+
+                    // Append student div to container
+                    container.append(studentDiv);
+                });
+            }
+
+            // Extract course ID from URL and fetch students enrolled in the course
+            var urlParams = new URLSearchParams(window.location.search);
+            var courseId = urlParams.get("id");
+            if (courseId) {
+                getStudentsInCourse(courseId);
+            }
+        });
+    </script>
+}

@@ -103,6 +103,39 @@ namespace GeniusFusion_GroupProject.Controllers
             return NoContent();
         }
 
+        [HttpGet("/Course/{id}/Students")]
+        public async Task<ActionResult<IEnumerable<Student>>> GetStudentsEnrolledInCourse(int id)
+        {
+            var course = await _context.Courses.Include(c => c.Enrollments).ThenInclude(e => e.Student).FirstOrDefaultAsync(c => c.CourseId == id);
+
+            if (course == null)
+            {
+                return NotFound("Course not found.");
+            }
+
+            var students = course.Enrollments.Select(e => e.Student).ToList();
+            return students;
+        }
+
+
+        [HttpGet("/Faculties/{facultyId}/Courses")]
+        public async Task<ActionResult<IEnumerable<Course>>> GetCoursesByFaculty(int facultyId)
+        {
+            // Retrieve the faculty by ID including their courses
+            var faculty = await _context.Faculties
+                .Include(f => f.CoursesTaught)
+                .ThenInclude(c => c.Enrollments)
+                .FirstOrDefaultAsync(f => f.FacultyId == facultyId);
+
+            if (faculty == null)
+            {
+                return NotFound("Faculty not found.");
+            }
+
+            // Return the list of courses taught by the faculty
+            return faculty.CoursesTaught.ToList();
+        }
+
         private bool CourseExists(int id)
         {
             return _context.Courses.Any(e => e.CourseId == id);

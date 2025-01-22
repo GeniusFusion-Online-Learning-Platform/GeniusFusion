@@ -2,7 +2,7 @@
 {
     public class StudentCredentials
     {
-        public int Id { get; set; }
+        public int StudentCredentialsId { get; set; }
         public string Username { get; set; }
         public string Password { get; set; }
     }

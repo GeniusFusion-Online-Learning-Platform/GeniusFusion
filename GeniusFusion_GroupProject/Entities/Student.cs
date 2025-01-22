@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using System.Text.Json.Serialization;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace GeniusFusion_GroupProject.Entities
 {
@@ -24,6 +25,7 @@ namespace GeniusFusion_GroupProject.Entities
         public string? StudentEmail { get; set; }
 
         public List <Enrollment> Enrollments { get; set; }
+
 
         
 

@@ -25,7 +25,7 @@ namespace GeniusFusion_GroupProject.Controllers
             _context.StudentCredentials.Add(student);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction(nameof(GetStudent), new { id = student.Id }, student);
+            return CreatedAtAction(nameof(GetStudent), new { id = student.StudentCredentialsId }, student);
         }
 
         // POST: api/StudentCredentials/Login

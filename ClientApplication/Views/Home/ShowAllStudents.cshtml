@@ -1,0 +1,99 @@
+﻿
+
+@{
+    ViewData["Title"] = "Show All Students";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    /* Set background color and font color */
+    body {
+        background-color: #f8f9fa; /* Background color */
+        color: #000000; /* Font color */
+    }
+
+    /* CSS styles for table container */
+    .table-container {
+        background-color: #ffffff; /* Form container background color */
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add box shadow */
+        overflow-x: auto; /* Add horizontal scroll for small screens */
+    }
+
+    /* CSS styles for table */
+    .table {
+        width: 100%; /* Table takes full width of the container */
+        border-collapse: collapse; /* Collapse borders for cleaner look */
+    }
+
+        .table th, .table td {
+            padding: 8px 12px; /* Add padding to table cells */
+            text-align: left; /* Align text to left */
+            border-bottom: 1px solid #dddddd; /* Add bottom border to rows */
+        }
+
+        .table th {
+            background-color: #007bff; /* Header background color */
+            color: #ffffff; /* Header text color */
+        }
+
+        .table tbody tr:nth-child(even) {
+            background-color: #f2f2f2; /* Alternate row background color */
+        }
+
+        .table tbody tr:hover {
+            background-color: #e2e2e2; /* Hover row background color */
+        }
+</style>
+
+<h1>Show All Students</h1>
+
+<div class="table-container">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Date of Birth</th>
+                <th>Phone</th>
+                <th>Address</th>
+                <th>Email</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Table rows will be populated here -->
+        </tbody>
+    </table>
+</div>
+@* <a href="c:\users\modhr\onedrive\documents\genuisfusion\clientapplication\views\home\showallstudents.cshtml">c:\users\modhr\onedrive\documents\genuisfusion\clientapplication\views\home\showallstudents.cshtml</a> *@
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            // Get all students
+            $.ajax({
+                type: "GET",
+                url: "https://localhost:7284/Students",
+                contentType: "application/json",
+                success: function (students) {
+                    var rows = '';
+                    students.forEach(function (student) {
+                        rows += '<tr>';
+                        rows += '<td>' + student.studentId + '</td>';
+                        rows += '<td>' + student.studentName + '</td>';
+                        rows += '<td>' + student.dateOfBirth + '</td>';
+                        rows += '<td>' + student.studentPhone + '</td>';
+                        rows += '<td>' + student.studentAddress + '</td>';
+                        rows += '<td>' + student.studentEmail + '</td>';
+                        rows += '</tr>';
+                    });
+                    $('.table tbody').html(rows);
+                },
+                error: function (xhr, status, error) {
+                    console.log(xhr.responseText);
+                }
+            });
+        });
+    </script>
+}

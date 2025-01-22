@@ -1,0 +1,39 @@
+﻿@{
+    ViewData["Title"] = "Show Faculty";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Show Faculty</h1>
+
+<div id="facultyDetails">
+    <!-- Student details will be populated here -->
+</div>
+
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            // Extract student ID from query parameters
+            var facultyId = new URLSearchParams(window.location.search).get('id');
+
+            // Get student details by ID
+            $.ajax({
+                type: "GET",
+                url: "https://localhost:7284/Faculties/" + facultyId,
+                contentType: "application/json",
+                success: function (faculty) {
+                    var details = '<p>ID: ' + faculty.facultyId + '</p>' +
+                        '<p>Name: ' + faculty.facultyName + '</p>' +
+                        '<p>Date of Birth: ' + faculty.dateOfBirth + '</p>' +
+                        '<p>Phone: ' + faculty.facultyPhone + '</p>' +
+                        '<p>Address: ' + faculty.facultyAddress + '</p>' +
+                        '<p>Email: ' + faculty.facultyEmail + '</p>';
+                    $('#facultyDetails').html(details);
+                },
+                error: function (xhr, status, error) {
+                    console.log(xhr.responseText);
+                }
+            });
+        });
+    </script>
+}

@@ -1,0 +1,68 @@
+﻿
+
+@{
+    ViewData["Title"] = "Show Student";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    /* Set background color and font color */
+    body {
+        background-color: #f8f9fa; /* Background color */
+        color: #000000; /* Font color */
+    }
+
+    /* CSS styles for student details container */
+    #studentDetails {
+        background-color: #ffffff; /* Container background color */
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add box shadow */
+        width: 50%; /* Set width to 50% of the viewport */
+        margin: 20px auto; /* Center align horizontally */
+    }
+
+        #studentDetails p {
+            margin-bottom: 10px; /* Add margin between paragraphs */
+        }
+
+    /* Center align the header */
+    h1 {
+        text-align: center; /* Center align the text */
+    }
+</style>
+
+<h1>Show Student</h1>
+
+<div id="studentDetails">
+    <!-- Student details will be populated here -->
+</div>
+
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            // Extract student ID from query parameters
+            var studentId = new URLSearchParams(window.location.search).get('id');
+
+            // Get student details by ID
+            $.ajax({
+                type: "GET",
+                url: "https://localhost:7284/Students/" + studentId,
+                contentType: "application/json",
+                success: function (student) {
+                    var details = '<p>ID: ' + student.studentId + '</p>' +
+                        '<p>Name: ' + student.studentName + '</p>' +
+                        '<p>Date of Birth: ' + student.dateOfBirth + '</p>' +
+                        '<p>Phone: ' + student.studentPhone + '</p>' +
+                        '<p>Address: ' + student.studentAddress + '</p>' +
+                        '<p>Email: ' + student.studentEmail + '</p>';
+                    $('#studentDetails').html(details);
+                },
+                error: function (xhr, status, error) {
+                    console.log(xhr.responseText);
+                }
+            });
+        });
+    </script>
+}

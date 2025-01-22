@@ -1,0 +1,37 @@
+﻿@{
+    ViewData["Title"] = "Show All Courses";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Show All Course</h1>
+
+<div id="courseTable">
+    <!-- Table to display students will be populated here -->
+</div>
+
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $.ajax({
+                type: "GET",
+                url: "https://localhost:7284/Course",
+                contentType: "application/json",
+                success: function (courses) {
+                    var table = '<table class="table"><thead><tr><th>Course Id</th><th>Course Name</th></tr></thead><tbody>';
+
+                    courses.forEach(function (Course) {
+                        table += '<tr><td>' + Course.courseId + '</td><td>' + Course.courseName + '</td></tr>';
+                    });
+
+                    table += '</tbody></table>';
+
+                    $('#courseTable').html(table);
+                },
+                error: function (xhr, status, error) {
+                    console.log(xhr.responseText);
+                }
+            });
+        });
+    </script>
+}

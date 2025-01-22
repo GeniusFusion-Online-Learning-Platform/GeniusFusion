@@ -1,0 +1,250 @@
+﻿
+
+@{
+    ViewData["Title"] = "Admin Dashboard";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    /* General styling */
+    .section {
+        margin-bottom: 30px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Increased shadow effect */
+        padding: 20px;
+        display: flex; /* Add flex display */
+        justify-content: space-between; /* Add space between items */
+    }
+
+    .btn {
+        border-radius: 20px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Increased shadow effect */
+        transition: transform 0.2s ease-in-out;
+    }
+
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+
+    /* Specific styling for each section */
+    #studentSection,
+    #facultySection,
+    #courseSection {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .chart-container {
+        width: 45%; /* Adjust width */
+        margin: 10px;
+    }
+
+    .button-container {
+        margin-top: 20px;
+    }
+</style>
+
+<h1 style="text-align: center;">Admin Dashboard</h1>
+
+<div class="section" id="studentSection">
+    <h2>Students</h2>
+
+    <div class="chart-container">
+        <!-- Bar Chart -->
+        <canvas id="studentChart"></canvas>
+    </div>
+
+    <div class="chart-container">
+        <!-- Line Chart -->
+        <canvas id="studentTrendChart"></canvas>
+    </div>
+
+    <!-- Manage Students Button -->
+    <div class="button-container">
+        <button id="manageStudentsBtn" class="btn btn-primary">Manage Students</button>
+    </div>
+
+    <!-- Student management buttons -->
+    <div id="studentManagementButtons" class="student-management-buttons" style="display: none;">
+        <button id="createStudentBtn" class="btn btn-primary">Create Student</button>
+        <button id="getStudentsBtn" class="btn btn-primary">Get All Students</button>
+        <button id="getStudentByIdBtn" class="btn btn-primary">Get Student by ID</button>
+        <button id="deleteStudentBtn" class="btn btn-danger">Delete Student</button>
+    </div>
+</div>
+
+<div class="section" id="facultySection">
+    <h2>Manage Faculties</h2>
+    <div class="chart-container">
+        <!-- Pie Chart for Faculties -->
+        <canvas id="facultyChart"></canvas>
+    </div>
+    <div class="button-container">
+        <!-- Manage Faculties Button -->
+        <button id="manageFacultiesBtn" class="btn btn-primary">Manage Faculties</button>
+    </div>
+    <div id="manageFacultiesDiv" style="display:none;">
+        <button id="getFacultiesByIdBtn" class="btn btn-info">Get Faculty by Id</button>
+        <button id="getFacultiesBtn" class="btn btn-info">Get Faculties</button>
+        <button id="createFacultyBtn" class="btn btn-success">Create Faculty</button>
+        <button id="deleteFacultyBtn" class="btn btn-danger">Delete Faculty</button>
+    </div>
+</div>
+
+<div class="section" id="courseSection">
+    <h2>Manage Courses</h2>
+    <div class="chart-container">
+        <!-- Radar Chart for Courses -->
+        <canvas id="courseChart"></canvas>
+    </div>
+    <div class="button-container">
+        <!-- Manage Course Button -->
+        <button id="manageCoursebtn" class="btn btn-primary">Manage Course</button>
+    </div>
+    <div id="manageCoursesDiv" style="display:none;">
+        <button id="assignCourseBtn" class="btn btn-success">Create Course</button>
+        <button id="getCoursesBtn" class="btn btn-info"> Get All Courses</button>
+        <button id="deleteCourseBtn" class="btn btn-danger">Delete Course</button>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="~/js/AdminDashboard.js"></script>
+
+    <script>
+        // Generate random data for the bar chart
+        var studentData = {
+            labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+            datasets: [{
+                label: '# of Votes',
+                data: [12, 19, 3, 5, 2, 3],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ],
+                borderWidth: 1
+            }]
+        };
+
+        // Generate random data for the line chart
+        var studentTrendData = {
+            labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+            datasets: [{
+                label: 'Students Trend',
+                data: [65, 59, 80, 81, 56, 55, 40],
+                fill: false,
+                borderColor: 'rgb(75, 192, 192)',
+                tension: 0.1
+            }]
+        };
+
+        // Generate random data for the pie chart (faculties)
+        var facultyData = {
+            labels: ['Engineering', 'Science', 'Arts', 'Business', 'Law'],
+            datasets: [{
+                label: 'Faculties',
+                data: [30, 25, 20, 15, 10],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.6)',
+                    'rgba(54, 162, 235, 0.6)',
+                    'rgba(255, 206, 86, 0.6)',
+                    'rgba(75, 192, 192, 0.6)',
+                    'rgba(153, 102, 255, 0.6)'
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)'
+                ],
+                borderWidth: 1
+            }]
+        };
+
+        // Generate random data for the radar chart (courses)
+        var courseData = {
+            labels: ['Math', 'Physics', 'Literature', 'History', 'Computer Science', 'Biology'],
+            datasets: [{
+                label: 'Courses',
+                data: [80, 70, 85, 60, 90, 75],
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                borderColor: 'rgb(75, 192, 192)',
+                pointBackgroundColor: 'rgb(75, 192, 192)',
+                pointBorderColor: '#fff',
+                pointHoverBackgroundColor: '#fff',
+                pointHoverBorderColor: 'rgb(75, 192, 192)'
+            }]
+        };
+
+        // Chart configurations
+        var options = {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        };
+
+        // Render the bar chart for students
+        var ctx = document.getElementById('studentChart').getContext('2d');
+        var studentChart = new Chart(ctx, {
+            type: 'bar',
+            data: studentData,
+            options: options
+        });
+
+        // Render the line chart for students' trend
+        var ctx2 = document.getElementById('studentTrendChart').getContext('2d');
+        var studentTrendChart = new Chart(ctx2, {
+            type: 'line',
+            data: studentTrendData,
+            options: options
+        });
+
+        // Render the pie chart for faculties
+        var ctx3 = document.getElementById('facultyChart').getContext('2d');
+        var facultyChart = new Chart(ctx3, {
+            type: 'pie',
+            data: facultyData,
+            options: options
+        });
+
+        // Render the radar chart for courses
+        var ctx4 = document.getElementById('courseChart').getContext('2d');
+        var courseChart = new Chart(ctx4, {
+            type: 'radar',
+            data: courseData,
+            options: options
+        });
+
+        // Event listener for managing students button
+        $('#manageStudentsBtn').click(function () {
+            $('#studentManagementButtons').toggle();
+        });
+    </script>
+}
+
+@section Styles {
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+}
+
+
+

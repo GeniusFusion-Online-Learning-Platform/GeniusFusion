@@ -241,11 +241,11 @@ namespace GeniusFusion_GroupProject.Migrations
 
             modelBuilder.Entity("GeniusFusion_GroupProject.Entities.StudentCredentials", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("StudentCredentialsId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("StudentCredentialsId"));
 
                     b.Property<string>("Password")
                         .IsRequired()
@@ -255,7 +255,7 @@ namespace GeniusFusion_GroupProject.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
+                    b.HasKey("StudentCredentialsId");
 
                     b.ToTable("StudentCredentials");
                 });

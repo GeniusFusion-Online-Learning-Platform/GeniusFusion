@@ -1,22 +1,66 @@
-﻿
-<h1>Register</h1>
+﻿@{
+    ViewData["Title"] = "Register";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
 
-<form id="registerForm">
-    <label for="registerUsername">Username:</label>
-    <input type="text" id="registerUsername" name="registerUsername" required><br><br>
-    <label for="registerPassword">Password:</label>
-    <input type="password" id="registerPassword" name="registerPassword" required><br><br>
-    <label for="registerAccessType">Access Type:</label>
-    <select id="registerAccessType" name="registerAccessType">
-        <option value="Admin">Admin</option>
-        <option value="Faculty">Faculty</option>
-        <option value="Student">Student</option>
-    </select><br><br>
-    <input type="submit" value="Register">
-</form>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+<link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
+<link rel="stylesheet" href="https://colorlib.com/etc/lf/Login_v1/css/main.css">
 
-<div>
-    <p>Already have an account? <a href="@Url.Action("Login", "Home")">Login here</a>.</p>
+<style>
+    .register-container {
+        background-image: url('/images/login_background.jpg');
+        background-size: cover;
+        background-position: center;
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+
+    .register-form {
+        margin-top: 20px; /* Adjust as needed */
+    }
+
+        .register-form .input-group,
+        .register-form button {
+            margin-bottom: 15px; /* Adjust as needed */
+        }
+
+    .fadeIn {
+        margin: 0;
+    }
+</style>
+
+<h1 class="fadeIn animated">Register</h1>
+
+<div class="register-container">
+    <form id="registerForm" class="fadeInDown animated register-form">
+        <div class="input-group">
+            <span class="input-group-addon"><i class="icon ion-ios-person"></i></span>
+            <input type="text" id="registerUsername" name="registerUsername" class="form-control" placeholder="Username" required>
+        </div>
+        <div class="input-group">
+            <span class="input-group-addon"><i class="icon ion-ios-locked"></i></span>
+            <input type="password" id="registerPassword" name="registerPassword" class="form-control" placeholder="Password" required>
+        </div>
+        <div class="input-group">
+            <span class="input-group-addon"><i class="icon ion-ios-settings"></i></span>
+            <select id="registerAccessType" name="registerAccessType" class="form-control">
+                <option value="Admin">Admin</option>
+                <option value="Faculty">Faculty</option>
+                <option value="Student">Student</option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Register</button>
+        <div>
+            <p>Already have an account? <a href="@Url.Action("Login", "Home")">Login here</a>.</p>
+        </div>
+    </form>
 </div>
 
 @section Scripts {

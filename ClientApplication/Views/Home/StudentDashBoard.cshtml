@@ -1,0 +1,208 @@
+﻿@* 
+
+@{
+    ViewData["Title"] = "Courses";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+<link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap" rel="stylesheet">
+
+<style>
+    .course-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 20px;
+        padding: 20px;
+    }
+
+    .course-card {
+        max-width: 300px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        padding: 10px;
+        text-align: center;
+        cursor: pointer;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add shadow effect to course cards */
+        transition: box-shadow 0.3s, transform 0.3s; /* Add transition for smooth effect */
+    }
+
+        .course-card:hover {
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Highlight shadow effect on hover */
+            transform: translateY(-5px); /* Move card slightly up on hover */
+        }
+
+    .course-image {
+        max-width: 100%;
+        height: auto;
+    }
+</style>
+
+<h1 class="text-center mt-4 mb-3">Courses</h1>
+
+<div class="course-container">
+    <!-- Courses will be dynamically added here -->
+</div>
+
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            // Function to fetch all courses and display them
+            function getAllCourses() {
+                $.ajax({
+                    type: "GET",
+                    url: "https://localhost:7284/Course",
+                    contentType: "application/json",
+                    success: function (courses) {
+                        console.log("All courses:", courses);
+                        displayCourses(courses);
+                    },
+                    error: function (xhr, status, error) {
+                        console.error("Error fetching courses:", xhr.responseText);
+                        // Handle error, show alert, etc.
+                    }
+                });
+            }
+
+            // Function to dynamically display courses
+            function displayCourses(courses) {
+                var container = $(".course-container");
+
+                // Clear the container before adding new courses to avoid duplication
+                container.empty();
+
+                // Loop through each course and create HTML elements to display them
+                $.each(courses, function (index, course) {
+                    // Create anchor tag wrapping the course card
+                    var anchor = $("<a>").attr("href", "#").attr("data-id", course.courseId).addClass("course-link"); // Set data-id attribute for course ID
+                    var card = $("<div>").addClass("course-card");
+                    var image = $("<img>").addClass("course-image").attr("src", "/images/courses/course" + (index % 10 + 1) + ".jpg"); // Assuming you have 10 images
+                    var id = $("<h5>").addClass("course-id").text("ID: " + course.courseId);
+                    var name = $("<p>").addClass("course-name").text("Name: " + course.courseName);
+
+                    // Append image, id, and name to the card
+                    card.append(image, id, name);
+
+                    // Append card to the anchor tag
+                    anchor.append(card);
+
+                    // Append anchor tag to the container
+                    container.append(anchor);
+                });
+            }
+
+            // Call the function to fetch and display all courses
+            getAllCourses();
+
+            // Click event handler for course cards
+            $(document).on("click", ".course-link", function (e) {
+                e.preventDefault(); // Prevent default anchor behavior
+                var courseId = $(this).data("id"); // Get the course ID from data-id attribute
+                window.location.href = "CourseInfo?courseId=" + courseId; // Redirect to CourseInfo page with course ID
+            });
+        });
+    </script>
+}
+ *@
+
+@{
+    ViewData["Title"] = "Courses";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+<link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap" rel="stylesheet">
+
+<style>
+    .course-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 20px;
+        padding: 20px;
+    }
+
+    .course-card {
+        max-width: 300px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        padding: 10px;
+        text-align: center;
+        cursor: pointer;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add shadow effect to course cards */
+        transition: box-shadow 0.3s, transform 0.3s; /* Add transition for smooth effect */
+    }
+
+        .course-card:hover {
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Highlight shadow effect on hover */
+            transform: translateY(-5px); /* Move card slightly up on hover */
+        }
+
+    .course-image {
+        max-width: 100%;
+        height: auto;
+    }
+</style>
+
+<h1 class="text-center mt-4 mb-3">Courses</h1>
+
+<div class="course-container">
+    <!-- Courses will be dynamically added here -->
+</div>
+
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            // Function to fetch all courses and display them
+            function getAllCourses() {
+                $.ajax({
+                    type: "GET",
+                    url: "https://localhost:7284/Course",
+                    contentType: "application/json",
+                    success: function (courses) {
+                        console.log("All courses:", courses);
+                        displayCourses(courses);
+                    },
+                    error: function (xhr, status, error) {
+                        console.error("Error fetching courses:", xhr.responseText);
+                        // Handle error, show alert, etc.
+                    }
+                });
+            }
+
+            // Function to dynamically display courses
+            function displayCourses(courses) {
+                var container = $(".course-container");
+
+                // Clear the container before adding new courses to avoid duplication
+                container.empty();
+
+                // Loop through each course and create HTML elements to display them
+                $.each(courses, function (index, course) {
+                    // Create anchor tag wrapping the course card
+                    var imageUrl = "/images/courses/course" + (index % 10 + 1) + ".jpg"; // Assuming you have 10 images
+                    var anchor = $("<a>").attr("href", "CourseInfo?courseId=" + course.courseId + "&imageUrl=" + imageUrl).addClass("course-link");
+                    var card = $("<div>").addClass("course-card");
+                    var image = $("<img>").addClass("course-image").attr("src", imageUrl);
+                    var id = $("<h5>").addClass("course-id").text("ID: " + course.courseId);
+                    var name = $("<p>").addClass("course-name").text("Name: " + course.courseName);
+
+                    // Append image, id, and name to the card
+                    card.append(image, id, name);
+
+                    // Append card to the anchor tag
+                    anchor.append(card);
+
+                    // Append anchor tag to the container
+                    container.append(anchor);
+                });
+            }
+
+            // Call the function to fetch and display all courses
+            getAllCourses();
+        });
+    </script>
+}

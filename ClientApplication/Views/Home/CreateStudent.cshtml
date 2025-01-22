@@ -1,0 +1,200 @@
+﻿@* 
+
+@{
+    ViewData["Title"] = "Create Student";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    body {
+        background-color: #f8f9fa; /* Change background color */
+        color: #000000; /* Change font color to black */
+    }
+
+    .form-container {
+        background-color: #ffffff; /* Form container background color */
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add box shadow */
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    .form-control {
+        border-radius: 5px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add shadow effect */
+        transition: box-shadow 0.3s; /* Add transition for smooth effect */
+    }
+
+        .form-control:focus {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add floating effect on focus */
+        }
+
+    .btn-primary {
+        background-color: #007bff; /* Button background color */
+        border-color: #007bff; /* Button border color */
+    }
+
+        .btn-primary:hover {
+            background-color: #0069d9; /* Button hover background color */
+            border-color: #0062cc; /* Button hover border color */
+        }
+
+        .btn-primary:focus {
+            box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.5); /* Button focus box shadow */
+        }
+</style>
+
+<h1>Create Student</h1>
+
+<div class="form-container">
+    <form id="createStudentForm" class="needs-validation" novalidate>
+        <div class="form-group">
+            <label for="studentName">Student Name:</label>
+            <input type="text" class="form-control" id="studentName" name="studentName" required>
+            <div class="invalid-feedback">Please provide a student name.</div>
+        </div>
+        <div class="form-group">
+            <label for="dateOfBirth">Date of Birth:</label>
+            <input type="date" class="form-control" id="dateOfBirth" name="dateOfBirth" required>
+            <div class="invalid-feedback">Please provide a valid date of birth.</div>
+        </div>
+        <div class="form-group">
+            <label for="studentPhone">Phone:</label>
+            <input type="tel" class="form-control" id="studentPhone" name="studentPhone" required>
+            <div class="invalid-feedback">Please provide a phone number.</div>
+        </div>
+        <div class="form-group">
+            <label for="studentAddress">Address:</label>
+            <input type="text" class="form-control" id="studentAddress" name="studentAddress" required>
+            <div class="invalid-feedback">Please provide an address.</div>
+        </div>
+        <div class="form-group">
+            <label for="studentEmail">Email:</label>
+            <input type="email" class="form-control" id="studentEmail" name="studentEmail" required>
+            <div class="invalid-feedback">Please provide a valid email.</div>
+        </div>
+        <button type="submit" class="btn btn-primary">Create</button>
+    </form>
+</div>
+
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="~/js/Student.js"></script>
+}
+ *@ 
+
+@{
+    ViewData["Title"] = "Create Student";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    body {
+        background-color: #f8f9fa; /* Change background color */
+        color: #000000; /* Change font color to black */
+    }
+
+    .form-container {
+        background-color: #ffffff; /* Form container background color */
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add box shadow */
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    .form-control {
+        border-radius: 5px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add shadow effect */
+        transition: box-shadow 0.3s; /* Add transition for smooth effect */
+    }
+
+        .form-control:focus {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add floating effect on focus */
+        }
+
+    .btn-primary {
+        background-color: #007bff; /* Button background color */
+        border-color: #007bff; /* Button border color */
+    }
+
+        .btn-primary:hover {
+            background-color: #0069d9; /* Button hover background color */
+            border-color: #0062cc; /* Button hover border color */
+        }
+
+        .btn-primary:focus {
+            box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.5); /* Button focus box shadow */
+        }
+</style>
+
+<h1>Create Student</h1>
+
+<div class="form-container">
+    <form id="createStudentForm" class="needs-validation" novalidate>
+        <div class="form-group">
+            <label for="studentName">Student Name:</label>
+            <input type="text" class="form-control" id="studentName" name="studentName" required>
+            <div class="invalid-feedback">Please provide a student name.</div>
+        </div>
+        <div class="form-group">
+            <label for="dateOfBirth">Date of Birth:</label>
+            <input type="date" class="form-control" id="dateOfBirth" name="dateOfBirth" required>
+            <div class="invalid-feedback">Please provide a valid date of birth.</div>
+        </div>
+        <div class="form-group">
+            <label for="studentPhone">Phone:</label>
+            <input type="tel" class="form-control" id="studentPhone" name="studentPhone" required>
+            <div class="invalid-feedback">Please provide a phone number.</div>
+        </div>
+        <div class="form-group">
+            <label for="studentAddress">Address:</label>
+            <input type="text" class="form-control" id="studentAddress" name="studentAddress" required>
+            <div class="invalid-feedback">Please provide an address.</div>
+        </div>
+        <div class="form-group">
+            <label for="studentEmail">Email:</label>
+            <input type="email" class="form-control" id="studentEmail" name="studentEmail" required>
+            <div class="invalid-feedback">Please provide a valid email.</div>
+        </div>
+        <button type="submit" class="btn btn-primary">Create</button>
+    </form>
+</div>
+
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#createStudentForm').submit(function (e) {
+                e.preventDefault();
+
+                var studentData = {
+                    studentName: $('#studentName').val(),
+                    dateOfBirth: $('#dateOfBirth').val(),
+                    studentPhone: $('#studentPhone').val(),
+                    studentAddress: $('#studentAddress').val(),
+                    studentEmail: $('#studentEmail').val()
+                };
+
+                $.ajax({
+                    type: "POST",
+                    url: "https://localhost:7284/Students",
+                    contentType: "application/json",
+                    data: JSON.stringify(studentData),
+                    success: function (response) {
+                        alert('Student created successfully');
+                        window.location.href = '/Home/AdminDashboard';
+                    },
+                    error: function (xhr, status, error) {
+                        console.error(xhr.responseText);
+                    }
+                });
+            });
+        });
+    </script>
+}

@@ -1,0 +1,612 @@
+﻿@* 
+
+@{
+    ViewData["Title"] = "Course Info";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+<link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap" rel="stylesheet">
+
+<style>
+    .course-info-container {
+        display: flex;
+        justify-content: center; /* Center horizontally */
+        margin: 20px auto; /* Add margin to center vertically */
+    }
+
+    .sidebar {
+        width: 200px;
+        background-color: #f8f9fa;
+        padding: 20px;
+        border-right: 1px solid #ccc;
+        margin-right: 20px; /* Add margin to separate from the main section */
+    }
+
+    .main-section {
+        max-width: 600px; /* Set maximum width */
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add shadow effect */
+    }
+
+    .course-image {
+        max-width: 100%;
+        height: auto;
+        margin-bottom: 20px; /* Add margin to separate from other content */
+    }
+
+    .course-details {
+        background-color: #f8f9fa; /* Background color */
+        padding: 20px;
+        border-radius: 5px;
+    }
+
+    .details-table {
+        width: 100%;
+    }
+
+        .details-table tr {
+            border-bottom: 1px solid #ccc;
+        }
+
+        .details-table th,
+        .details-table td {
+            padding: 10px;
+            text-align: left;
+        }
+
+    .add-task-container {
+        background-color: #f8f9fa; /* Background color */
+        padding: 20px;
+        border-radius: 5px;
+        margin-top: 20px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add shadow effect */
+        width: 200px; /* Set width */
+    }
+
+    .task-list {
+        margin-top: 20px;
+    }
+
+    .task-item {
+        margin-bottom: 10px;
+    }
+
+    .task-input {
+        margin-bottom: 10px;
+    }
+
+    .announcements {
+        background-color: #f8f9fa; /* Background color */
+        padding: 20px;
+        border-radius: 5px;
+        margin-top: 20px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add shadow effect */
+    }
+
+    .announcement-item {
+        margin-bottom: 15px;
+    }
+
+    .announcement-title {
+        font-weight: bold;
+        margin-bottom: 5px;
+    }
+
+    .announcement-content {
+        color: #333;
+    }
+
+    .enroll-button {
+        margin-top: 20px;
+    }
+</style>
+
+<h1 class="text-center mt-4 mb-3">Course Info</h1>
+
+<div class="course-info-container">
+    <div class="sidebar">
+        <h5 class="sidebar-heading">Sidebar</h5>
+        <ul class="nav flex-column">
+            <li class="nav-item">
+                <a class="nav-link" href="/sample.pdf" target="_blank">Course Outline</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/sample.pdf" target="_blank">Instructional Plan</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/sample.pdf" target="_blank">TextBook</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/sample.pdf" target="_blank">Schedule</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/sample.pdf" target="_blank">Help</a>
+            </li>
+
+            <button class="btn btn-primary enroll-button" onclick="enrollNow()">Enroll Now</button>
+        </ul>
+    </div>
+
+    <div class="main-section">
+        <img class="course-image" src="" alt="Course Image">
+        <div class="course-details">
+            <table class="details-table">
+                <tr>
+                    <th>ID:</th>
+                    <td class="course-id"></td>
+                </tr>
+                <tr>
+                    <th>Name:</th>
+                    <td class="course-name"></td>
+                </tr>
+                <!-- Add other course details here -->
+            </table>
+        </div>
+    </div>
+
+    <div class="add-task-container">
+        <h3>Add Tasks</h3>
+        <input type="text" class="form-control task-input" placeholder="Enter task">
+        <button class="btn btn-primary" onclick="addTask()">Add Task</button>
+        <div class="task-list">
+            <!-- Tasks will be dynamically added here -->
+        </div>
+    </div>
+
+    <div class="modal fade" id="enrollModal" tabindex="-1" role="dialog" aria-labelledby="enrollModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="enrollModalLabel">Enroll Now</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="studentId">Enter Student ID:</label>
+                        <input type="text" class="form-control" id="studentId">
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" onclick="submitEnrollment()">Enroll</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="announcements">
+    <h3>Announcements</h3>
+    <div class="announcement-item">
+        <div class="announcement-title">Announcement 1</div>
+        <div class="announcement-content">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce aliquet leo vel magna convallis, sed hendrerit nunc fermentum.</div>
+    </div>
+    <div class="announcement-item">
+        <div class="announcement-title">Announcement 2</div>
+        <div class="announcement-content">Nullam sit amet lacus id justo tristique fermentum eget sed purus.</div>
+    </div>
+    <div class="announcement-item">
+        <div class="announcement-title">Announcement 3</div>
+        <div class="announcement-content">Duis ac ex sit amet urna volutpat dictum in nec lacus. In rhoncus varius nisi nec condimentum.</div>
+    </div>
+</div>
+
+@section Scripts {
+    <!-- Your existing JavaScript code -->
+
+    <script>
+        // Function to extract query parameter from URL
+        function getParameterByName(name, url) {
+            if (!url) url = window.location.href;
+            name = name.replace(/[\[\]]/g, "\\$&");
+            var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+                results = regex.exec(url);
+            if (!results) return null;
+            if (!results[2]) return '';
+            return decodeURIComponent(results[2].replace(/\+/g, " "));
+        }
+
+        // Get course ID, image URL, and course name from query parameters
+        var courseId = getParameterByName('courseId');
+        var imageUrl = getParameterByName('imageUrl');
+        var courseName = $(".course-name").text().trim(); // Get the course name from the page and trim whitespace
+
+        // Set the image source
+        $(".course-image").attr("src", imageUrl);
+
+        // Function to fetch course details by ID
+        function getCourseDetails(courseId) {
+            $.ajax({
+                type: "GET",
+                url: "https://localhost:7284/Course/" + courseId,
+                contentType: "application/json",
+                success: function (course) {
+                    console.log("Course details:", course);
+                    displayCourseDetails(course);
+                },
+                error: function (xhr, status, error) {
+                    console.error("Error fetching course details:", xhr.responseText);
+                    // Handle error, show alert, etc.
+                }
+            });
+        }
+
+        // Function to display course details
+        function displayCourseDetails(course) {
+            // Update HTML elements with course details
+            $(".course-id").text(course.courseId);
+            $(".course-name").text(course.courseName);
+            courseName = course.courseName.trim(); // Update course name and trim whitespace
+            // Add other course details here if needed
+        }
+
+        // Call the function to fetch course details
+        getCourseDetails(courseId);
+
+        // Function to add a task
+        function addTask() {
+            var taskInput = $(".task-input").val();
+            if (taskInput.trim() !== "") {
+                var taskItem = '<div class="task-item">' + taskInput + '</div>';
+                $(".task-list").append(taskItem);
+                $(".task-input").val(""); // Clear input field
+            }
+        }
+
+        function enrollNow() {
+            $('#enrollModal').modal('show');
+        }
+
+        // Function to submit enrollment
+        function submitEnrollment() {
+            var studentId = $('#studentId').val();
+            // Add code to submit enrollment with studentId and courseName
+            var enrollmentData = {
+                StudentId: studentId,
+                CourseName: courseName
+            };
+
+            $.ajax({
+                type: "POST",
+                url: "https://localhost:7284/Enrollments",
+                contentType: "application/json",
+                data: JSON.stringify(enrollmentData),
+                success: function (response) {
+                    console.log("Enrollment successful:", response);
+                    // Handle success, show confirmation message, etc.
+                    $('#enrollModal').modal('hide'); // Close modal after enrollment
+                },
+                error: function (xhr, status, error) {
+                    console.error("Error enrolling student:", xhr.responseText);
+                    // Handle error, show alert, etc.
+                }
+            });
+        }
+
+        // Event listener for enroll button click
+        $('#enrollButton').click(function () {
+            submitEnrollment();
+        });
+    </script>
+}
+
+
+ *@
+
+@{
+    ViewData["Title"] = "Course Info";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+<link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap" rel="stylesheet">
+
+<style>
+    .course-info-container {
+        display: flex;
+        justify-content: center; /* Center horizontally */
+        margin: 20px auto; /* Add margin to center vertically */
+    }
+
+    .sidebar {
+        width: 200px;
+        background-color: #f8f9fa;
+        padding: 20px;
+        border-right: 1px solid #ccc;
+        margin-right: 20px; /* Add margin to separate from the main section */
+    }
+
+    .main-section {
+        max-width: 600px; /* Set maximum width */
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add shadow effect */
+    }
+
+    .course-image {
+        max-width: 100%;
+        height: auto;
+        margin-bottom: 20px; /* Add margin to separate from other content */
+    }
+
+    .course-details {
+        background-color: #f8f9fa; /* Background color */
+        padding: 20px;
+        border-radius: 5px;
+    }
+
+    .details-table {
+        width: 100%;
+    }
+
+        .details-table tr {
+            border-bottom: 1px solid #ccc;
+        }
+
+        .details-table th,
+        .details-table td {
+            padding: 10px;
+            text-align: left;
+        }
+
+    .add-task-container {
+        background-color: #f8f9fa; /* Background color */
+        padding: 20px;
+        border-radius: 5px;
+        margin-top: 20px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add shadow effect */
+        width: 200px; /* Set width */
+    }
+
+    .task-list {
+        margin-top: 20px;
+    }
+
+    .task-item {
+        margin-bottom: 10px;
+    }
+
+    .task-input {
+        margin-bottom: 10px;
+    }
+
+    .announcements {
+        background-color: #f8f9fa; /* Background color */
+        padding: 20px;
+        border-radius: 5px;
+        margin-top: 20px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add shadow effect */
+    }
+
+    .announcement-item {
+        margin-bottom: 15px;
+    }
+
+    .announcement-title {
+        font-weight: bold;
+        margin-bottom: 5px;
+    }
+
+    .announcement-content {
+        color: #333;
+    }
+
+    .enroll-button {
+        margin-top: 20px;
+    }
+</style>
+
+<h1 class="text-center mt-4 mb-3">Course Info</h1>
+
+<div class="course-info-container">
+    <div class="sidebar">
+        <h5 class="sidebar-heading">Sidebar</h5>
+        <ul class="nav flex-column">
+            <li class="nav-item">
+                <a class="nav-link" href="/sample.pdf" target="_blank">Course Outline</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/sample.pdf" target="_blank">Instructional Plan</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/sample.pdf" target="_blank">TextBook</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/sample.pdf" target="_blank">Schedule</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/sample.pdf" target="_blank">Help</a>
+            </li>
+            <li class="nav-item">
+                <button class="btn btn-primary enroll-button" onclick="enrollNow()">Enroll Now</button>
+            </li>
+        </ul>
+    </div>
+
+    <div class="main-section">
+        <img class="course-image" src="" alt="Course Image">
+        <div class="course-details">
+            <table class="details-table">
+                <tr>
+                    <th>ID:</th>
+                    <td class="course-id"></td>
+                </tr>
+                <tr>
+                    <th>Name:</th>
+                    <td class="course-name"></td>
+                </tr>
+                <!-- Add other course details here -->
+            </table>
+        </div>
+    </div>
+
+    <div class="add-task-container">
+        <h3>Add Tasks</h3>
+        <input type="text" class="form-control task-input" placeholder="Enter task">
+        <button class="btn btn-primary" onclick="addTask()">Add Task</button>
+        <div class="task-list">
+            <!-- Tasks will be dynamically added here -->
+        </div>
+    </div>
+
+    <div class="modal fade" id="enrollModal" tabindex="-1" role="dialog" aria-labelledby="enrollModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="enrollModalLabel">Enroll Now</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p id="enrollmentMessage"></p> <!-- Paragraph element for displaying enrollment message -->
+                    <div class="form-group">
+                        <label for="studentId">Enter Student ID:</label>
+                        <input type="text" class="form-control" id="studentId">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button id="enrollButton" type="button" class="btn btn-primary">Enroll</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="announcements">
+    <h3>Announcements</h3>
+    <div class="announcement-item">
+        <div class="announcement-title">Announcement 1</div>
+        <div class="announcement-content">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce aliquet leo vel magna convallis, sed hendrerit nunc fermentum.</div>
+    </div>
+    <div class="announcement-item">
+        <div class="announcement-title">Announcement 2</div>
+        <div class="announcement-content">Nullam sit amet lacus id justo tristique fermentum eget sed purus.</div>
+    </div>
+    <div class="announcement-item">
+        <div class="announcement-title">Announcement 3</div>
+        <div class="announcement-content">Duis ac ex sit amet urna volutpat dictum in nec lacus. In rhoncus varius nisi nec condimentum.</div>
+    </div>
+</div>
+
+@section Scripts {
+    <!-- Your existing JavaScript code -->
+
+    <script>
+        // Function to extract query parameter from URL
+        function getParameterByName(name, url) {
+            if (!url) url = window.location.href;
+            name = name.replace(/[\[\]]/g, "\\$&");
+            var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+                results = regex.exec(url);
+            if (!results) return null;
+            if (!results[2]) return '';
+            return decodeURIComponent(results[2].replace(/\+/g, " "));
+        }
+
+        // Get course ID, image URL, and course name from query parameters
+        var courseId = getParameterByName('courseId');
+        var imageUrl = getParameterByName('imageUrl');
+        var courseName = $(".course-name").text().trim(); // Get the course name from the page and trim whitespace
+
+        // Set the image source
+        $(".course-image").attr("src", imageUrl);
+
+        // Function to fetch course details by ID
+        function getCourseDetails(courseId) {
+            $.ajax({
+                type: "GET",
+                url: "https://localhost:7284/Course/" + courseId,
+                contentType: "application/json",
+                success: function (course) {
+                    console.log("Course details:", course);
+                    displayCourseDetails(course);
+                },
+                error: function (xhr, status, error) {
+                    console.error("Error fetching course details:", xhr.responseText);
+                    // Handle error, show alert, etc.
+                }
+            });
+        }
+
+        // Function to display course details
+        function displayCourseDetails(course) {
+            // Update HTML elements with course details
+            $(".course-id").text(course.courseId);
+            $(".course-name").text(course.courseName);
+            courseName = course.courseName.trim(); // Update course name and trim whitespace
+            // Add other course details here if needed
+        }
+
+        // Call the function to fetch course details
+        getCourseDetails(courseId);
+
+        // Function to add a task
+        function addTask() {
+            var taskInput = $(".task-input").val();
+            if (taskInput.trim() !== "") {
+                var taskItem = '<div class="task-item">' + taskInput + '</div>';
+                $(".task-list").append(taskItem);
+                $(".task-input").val(""); // Clear input field
+            }
+        }
+
+        function enrollNow() {
+            $('#enrollModal').modal('show');
+        }
+
+        // Function to submit enrollment
+        function submitEnrollment() {
+            var studentId = $('#studentId').val();
+            // Add code to submit enrollment with studentId and courseName
+            var enrollmentData = {
+                StudentId: studentId,
+                CourseName: courseName
+            };
+
+            $.ajax({
+                type: "POST",
+                url: "https://localhost:7284/Enrollments",
+                contentType: "application/json",
+                data: JSON.stringify(enrollmentData),
+                success: function (response) {
+                    var message = "Enrollment successful for Student ID: " +studentId ;
+                    console.log(message); // Log message to console
+                    $('#enrollmentMessage').text(message); // Set message in modal
+                    $('#enrollModal').modal('show'); // Show modal with message
+                    $('#enrollModal').on('hidden.bs.modal', function () {
+                        // Clear input field and modal message on modal close
+                        $('#studentId').val("");
+                        $('#enrollmentMessage').text("");
+                    });
+                },
+                error: function (xhr, status, error) {
+                    var errorMessage = "Error enrolling student: " + xhr.responseText;
+                    console.error(errorMessage); // Log error message to console
+                    $('#enrollmentMessage').text(errorMessage); // Set error message in modal
+                    $('#enrollModal').modal('show'); // Show modal with error message
+                    $('#enrollModal').on('hidden.bs.modal', function () {
+                        // Clear input field and modal message on modal close
+                        $('#studentId').val("");
+                        $('#enrollmentMessage').text("");
+                    });
+                }
+            });
+        }
+
+        // Event listener for enroll button click
+        $('#enrollButton').click(function () {
+            submitEnrollment();
+        });
+    </script>
+}

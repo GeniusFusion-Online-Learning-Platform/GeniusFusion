@@ -1,7 +1,5 @@
-﻿
-
-@{
-    Layout = null; // Since this is a standalone page, we remove the layout
+﻿@{
+    Layout = null;
 }
 
 <!DOCTYPE html>
@@ -11,6 +9,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Welcome to GeniusFusion</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/style.css">
     <style>
         body, html {
             height: 100%;
@@ -23,11 +24,16 @@
         .container {
             text-align: center;
         }
+
+        .logo {
+            max-width: 300px;
+            margin-bottom: 20px;
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <img src="~/images/logo-png.png" alt="GeniusFusion Logo" style="max-width: 200px;">
+        <img src="~/images/logo-png.png" alt="GeniusFusion Logo" class="logo">
         <h1>Welcome to GeniusFusion</h1>
     </div>
 
@@ -36,9 +42,10 @@
         $(document).ready(function () {
             // Redirect to the Login page after 5 seconds
             setTimeout(function () {
-                window.location.href = '@Url.Action("Login", "Home")'; // Assuming Home is the controller and Login is the action
+                window.location.href = '@Url.Action("Login", "Home")';
             }, 5000); // 5 seconds
         });
     </script>
 </body>
 </html>
+

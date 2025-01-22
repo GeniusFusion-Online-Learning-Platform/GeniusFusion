@@ -1,37 +1,131 @@
-﻿@using Microsoft.AspNetCore.Mvc
+﻿
+
+                        @using Microsoft.AspNetCore.Mvc
 @{
     ViewData["Title"] = "Faculty";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@{
-    ViewData["Title"] = "Home Page";
-}
+<style>
+    body {
+        background-color: #f8f9fa; /* Change background color */
+        color: #000000; /* Change font color to black */
+    }
 
-<div class="text-center">
+    .form-container {
+        background-color: #ffffff; /* Form container background color */
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add box shadow */
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    .form-control {
+        border-radius: 5px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add shadow effect */
+        transition: box-shadow 0.3s; /* Add transition for smooth effect */
+    }
+
+        .form-control:focus {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add floating effect on focus */
+        }
+
+    .btn-success {
+        background-color: #28a745; /* Button background color */
+        border-color: #28a745; /* Button border color */
+    }
+
+        .btn-success:hover {
+            background-color: #218838; /* Button hover background color */
+            border-color: #1e7e34; /* Button hover border color */
+        }
+
+        .btn-success:focus {
+            box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.5); /* Button focus box shadow */
+        }
+</style>
+
+<div class="text-left">
     <h1>Faculties List</h1>
     <ul id="facultiesList">
+        <!-- Faculties will be dynamically added here -->
     </ul>
 
+    <div class="form-container">
+        <h2>Add Faculty</h2>
+        <form id="addFacultyForm" class="needs-validation" novalidate>
+            <div class="form-group">
+                <label for="facultyNameInput">Faculty Name:</label><br>
+                <input type="text" class="form-control" id="facultyNameInput" name="facultyNameInput" required>
+                <div class="invalid-feedback">Please provide a faculty name.</div>
+            </div>
 
-    <h2>Add Faculty</h2>
-    <form id="addFacultyForm">
-        <label for="facultyNameInput">Faculty Name:</label><br>
-        <input type="text" id="facultyNameInput" name="facultyNameInput" required><br>
+            <div class="form-group">
+                <label for="dateOfBirthInput">Date of Birth:</label><br>
+                <input type="date" class="form-control" id="dateOfBirthInput" name="dateOfBirthInput" required>
+                <div class="invalid-feedback">Please provide a valid date of birth.</div>
+            </div>
 
-        <label for="dateOfBirthInput">Date of Birth:</label><br>
-        <input type="date" id="dateOfBirthInput" name="dateOfBirthInput" required><br>
+            <div class="form-group">
+                <label for="facultyPhoneInput">Phone:</label><br>
+                <input type="tel" class="form-control" id="facultyPhoneInput" name="facultyPhoneInput" required>
+                <div class="invalid-feedback">Please provide a phone number.</div>
+            </div>
 
-        <label for="facultyPhoneInput">Phone:</label><br>
-        <input type="tel" id="facultyPhoneInput" name="facultyPhoneInput" required><br>
+            <div class="form-group">
+                <label for="facultyAddressInput">Address:</label><br>
+                <input type="text" class="form-control" id="facultyAddressInput" name="facultyAddressInput" required>
+                <div class="invalid-feedback">Please provide an address.</div>
+            </div>
 
-        <label for="facultyAddressInput">Address:</label><br>
-        <input type="text" id="facultyAddressInput" name="facultyAddressInput" required><br>
+            <div class="form-group">
+                <label for="facultyEmailInput">Email:</label><br>
+                <input type="email" class="form-control" id="facultyEmailInput" name="facultyEmailInput" required>
+                <div class="invalid-feedback">Please provide a valid email.</div>
+            </div>
 
-        <label for="facultyEmailInput">Email:</label><br>
-        <input type="email" id="facultyEmailInput" name="facultyEmailInput" required><br>
-
-        <button id="addFacultyBtn" type="button" class="btn btn-success">Add Faculty</button>
-    </form>
-
+            <button id="addFacultyBtn" type="button" class="btn btn-success">Add Faculty</button>
+        </form>
+    </div>
 </div>
+
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            // Handle form submission
+            $('#createFacultyForm').submit(function (event) {
+                event.preventDefault(); // Prevent default form submission
+
+                // Get form data
+                var formData = {
+                    facultyName: $('#facultyNameInput').val(),
+                    dateOfBirth: $('#dateOfBirthInput').val(),
+                    facultyPhone: $('#facultyPhoneInput').val(),
+                    facultyAddress: $('#facultyAddressInput').val(),
+                    facultyEmail: $('#facultyEmailInput').val()
+                };
+
+                // Send POST request to create faculty
+                $.ajax({
+                    type: 'POST',
+                    url: 'https://localhost:7284/Faculties',
+                    contentType: 'application/json',
+                    data: JSON.stringify(formData),
+                    success: function (data) {
+                        console.log('Faculty created successfully:', data);
+                        // Redirect to another page or show success message
+                        window.location.href = '/Home/Faculty'; // Redirect to Faculty page
+                    },
+                    error: function (xhr, status, error) {
+                        console.error('Error creating faculty:', error);
+                        // Handle error appropriately (e.g., show error message)
+                    }
+                });
+            });
+        });
+    </script>
+    }

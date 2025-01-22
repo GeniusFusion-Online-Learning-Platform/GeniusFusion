@@ -1,4 +1,5 @@
 ﻿using GeniusFusion_GroupProject.Entities;
+using GeniusFusion_GroupProject.Messages;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
@@ -51,35 +52,8 @@ namespace GeniusFusion_GroupProject.Controllers
             return CreatedAtAction(nameof(GetStudent), new { id = student.StudentId }, student);
         }
 
-        //// PUT: api/Student/5
-        //[HttpPut("/Students/{id}")]
-        //public async Task<IActionResult> UpdateStudent(int id, Student student)
-        //{
-        //    if (id != student.StudentId)
-        //    {
-        //        return BadRequest();
-        //    }
 
-        //    _context.Entry(student).State = EntityState.Modified;
 
-        //    try
-        //    {
-        //        await _context.SaveChangesAsync();
-        //    }
-        //    catch (DbUpdateConcurrencyException)
-        //    {
-        //        if (!StudentExists(id))
-        //        {
-        //            return NotFound();
-        //        }
-        //        else
-        //        {
-        //            throw;
-        //        }
-        //    }
-
-        //    return NoContent();
-        //}
 
         // PUT: api/Student/5
         [HttpPut("/Students/{id}")]

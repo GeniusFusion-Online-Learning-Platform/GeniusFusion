@@ -7,12 +7,15 @@ $(document).ready(function () {
 
         $.ajax({
             type: "POST",
-            url: "https://localhost:7284/" + accessType + "/Register", // Update URL with your API project URL
+            url: "https://localhost:7284/" + accessType + "/Register",
             contentType: "application/json",
             data: JSON.stringify({ username: username, password: password }),
             success: function (response) {
-                alert(response);
-                // Redirect to login page or perform other actions based on the response
+                // Display registration success message
+                alert("Registration Successful");
+
+                // Optionally, you can redirect to the login page after successful registration
+                window.location.href = '/Home/Login';
             },
             error: function (xhr, status, error) {
                 alert(xhr.responseText);

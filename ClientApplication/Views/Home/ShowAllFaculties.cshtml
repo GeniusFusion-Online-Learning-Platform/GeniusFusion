@@ -1,0 +1,35 @@
+﻿@{
+    ViewData["Title"] = "Show All Faculties";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Show All Faculties</h1>
+
+<div id="facultiesTable">
+    <!-- Table to display students will be populated here -->
+</div>
+
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            // Get all students
+            $.ajax({
+                type: "GET",
+                url: "https://localhost:7284/Faculties",
+                contentType: "application/json",
+                success: function (faculties) {
+                    var table = '<table class="table"><thead><tr><th>ID</th><th>Name</th><th>Date of Birth</th><th>Phone</th><th>Address</th><th>Email</th></tr></thead><tbody>';
+                    faculties.forEach(function (faculty) {
+                        table += '<tr><td>' + faculty.facultyId + '</td><td>' + faculty.facultyName + '</td><td>' + faculty.dateOfBirth + '</td><td>' + faculty.facultyPhone + '</td><td>' + faculty.facultyAddress + '</td><td>' + faculty.facultyEmail + '</td></tr>';
+                    });
+                    table += '</tbody></table>';
+                    $('#facultiesTable').html(table);
+                },
+                error: function (xhr, status, error) {
+                    console.log(xhr.responseText);
+                }
+            });
+        });
+    </script>
+}

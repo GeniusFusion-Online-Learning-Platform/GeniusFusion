@@ -19,7 +19,7 @@ namespace GeniusFusion_GroupProject.Controllers
         }
 
         // POST: api/FacultyCredentials/Register
-        [HttpPost("Register")]
+        [HttpPost("/Faculty/Register")]
         public async Task<ActionResult<FacultyCredentials>> RegisterFaculty(FacultyCredentials faculty)
         {
             _context.facultyCredentials.Add(faculty);
@@ -29,7 +29,7 @@ namespace GeniusFusion_GroupProject.Controllers
         }
 
         // POST: api/FacultyCredentials/Login
-        [HttpPost("Login")]
+        [HttpPost("/Faculty/Login")]
         public async Task<ActionResult<FacultyCredentials>> LoginFaculty(FacultyCredentials faculty)
         {
             var existingFaculty = await _context.facultyCredentials.FirstOrDefaultAsync(f => f.Username == faculty.Username && f.Password == faculty.Password);
@@ -49,7 +49,7 @@ namespace GeniusFusion_GroupProject.Controllers
         }
 
         // GET: api/FacultyCredentials/5
-        [HttpGet("{id}")]
+        [HttpGet("/Faculty/{id}")]
         public async Task<ActionResult<FacultyCredentials>> GetFaculty(int id)
         {
             var faculty = await _context.facultyCredentials.FindAsync(id);
